@@ -7,7 +7,7 @@ import hmmlearn.hmm
 from hmmlearn.hmm import GaussianHMM
 from hmmlearn.hmm import GMMHMM
 from sklearn.model_selection import train_test_split
-
+import pickle
 def get_mfcc(file_path):
     y, sr = librosa.load(file_path) # read .wav file
     hop_length = math.floor(sr*0.010) # 10ms hop
@@ -76,6 +76,9 @@ for cname in class_names:
     models[cname] = hmm
 print("Training done")
 
+with open("gmm_hmm.pkl", "wb") as file:
+    pickle.dump(models, file)
+print("Saved!")
 
 print("Testing")
 
